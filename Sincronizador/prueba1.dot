@@ -1,0 +1,29 @@
+digraph sincronizador {
+    splines="FALSE";
+    style=filled
+    label="Sincronizador Plan State Machine"
+    color = blue;
+
+    //State 1
+    Loss_of_sync -> Loss_of_sync [label=comanopar, color=blue]; 
+    Loss_of_sync ->  Comma_detect_1 [label=comapar, color=blue];
+    //State 2
+    Comma_detect_1 -> 1 [label=NoData, color=blue];
+    1 -> Loss_of_sync  [color=blue];
+    Comma_detect_1 -> Acquire_Sync_1 [label=Data, color=blue];
+    //State 3
+    Acquire_Sync_1-> Comma_detect_2 [label=comapar, color=blue];
+    Acquire_Sync_1-> 1 [label=comanopar, color=blue];
+
+    //State 3
+    Comma_detect_2->  Acquire_Sync_2[label=Data, color=blue]
+    Comma_detect_2->  1[label=NoData, color=blue]
+    //State 4
+    Acquire_Sync_2-> Comma_detect_3 [label=comapar, color=blue];
+    Acquire_Sync_2-> 1 [label=comanopar, color=blue];
+    //State 3
+    Comma_detect_3->  Sync_Acquired[label=Data, color=blue]
+    Comma_detect_3->  1[label=NoData, color=blue]
+
+}
+
